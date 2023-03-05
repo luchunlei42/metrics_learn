@@ -1,0 +1,24 @@
+security:
+  oauth2:
+    client:
+      clientId: statistics-service
+      clientSecret: 123456
+      accessTokenUri: http://auth-service:8085/uaa/oauth/token
+      scope: server
+
+server:
+  servlet:
+    context-path: /statistics
+  port: 7000
+
+rates:
+  url: http://exchange-rate-service/exchange
+
+spring:
+  data:
+    mongodb:
+      url: mongodb+srv://luchunlei42:homeworkmax@lu1128@cluster0.28muwhb.mongodb.net/?retryWrites=true&w=majority
+      database: Cluster0
+feign:
+  circuitbreaker:
+    enabled: true

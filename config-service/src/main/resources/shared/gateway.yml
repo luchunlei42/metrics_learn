@@ -1,0 +1,44 @@
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
+
+server:
+  port: 4000
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: auth-service
+          uri: lb://auth-service
+          predicates:
+            - Path=/uaa/**
+
+        - id: account-service
+          uri: lb://account-service
+          predicates:
+            - Path=/accounts/**
+
+        - id: statistics-service
+          uri: lb://statistics-service
+          predicates:
+            - Path=/statistics/**
+
+        - id: notification-service
+          uri: lb://notification-service
+          predicates:
+            - Path=/notification/**
+
+        - id: exchange-rate-service
+          uri: lb://exchange-rate-service
+          predicates:
+            - Path=/exchange/**
+

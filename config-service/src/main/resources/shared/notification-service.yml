@@ -1,0 +1,47 @@
+security:
+  oauth2:
+    client:
+      clientId: notification-service
+      clientSecret: 123456
+      accessTokenUri: http://auth-service:5000/uaa/oauth/token
+      scope: server
+server:
+  servlet:
+    context-path: /notifications
+  port: 8087
+
+remind:
+  cron: 0 0 0 * * *
+  email:
+    text: "Hey, {0}! We''ve missed you here on PiggyMetrics. It''s time to check your budget statistics.\r\n\r\nCheers,\r\nPiggyMetrics team"
+    subject: Metrics reminder
+
+backup:
+  cron: 0 0 12 * * *
+  email: "Howdy, {0}. Your account backup is ready.\r\n\r\nCheers,\r\nPiggyMetrics team"
+  subject: PiggyMetrics account backup
+  attachment: backup.json
+
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 465
+    username: luchunlei
+    password: dev-password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            port: 465
+            class: javax.next.ssl.SSLSocketFactory
+            fallback: false
+          ssl:
+            enable: true
+  data:
+    mongodb:
+      url: mongodb+srv://luchunlei42:homeworkmax@lu112800@cluster0.28muwhb.mongodb.net/?retryWrites=true&w=majority
+      database: Cluster0
+feign:
+  circuitbreaker:
+    enabled: true
